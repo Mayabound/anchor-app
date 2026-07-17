@@ -4,8 +4,8 @@ const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
-const GROQ_API_KEY = process.env.GROQ_API_KEY;
-const MODEL = process.env.GROQ_MODEL || 'llama-3.3-70b-versatile';
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+const MODEL = process.env.GEMINI_MODEL || 'gemini-3.1-flash-lite';
 
 app.use(express.json({ limit: '32kb' }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -85,8 +85,8 @@ app.post('/api/chat', async (req, res) => {
   if (!message || typeof message !== 'string' || !message.trim()) {
     return res.status(400).json({ error: 'message is required' });
   }
-  if (!GROQ_API_KEY) {
-    return res.status(500).json({ error: 'Server is missing GROQ_API_KEY' });
+  if (!GEMINI_API_KEY) {
+    return res.status(500).json({ error: 'Server is missing GEMINI_API_KEY' });
   }
 
   const safeHistory = Array.isArray(history) ? history.slice(-20) : [];
@@ -105,11 +105,11 @@ app.post('/api/chat', async (req, res) => {
   });
 
   try {
-    const upstream = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    const upstream = await fetch('https://generativelanguage.googleapis.com/v1beta/openai/chat/completions', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        authorization: `Bearer ${GROQ_API_KEY}`,
+        authorization: `Bearer ${GEMINI_API_KEY}`,
       },
       body: JSON.stringify({
         model: MODEL,
