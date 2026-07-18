@@ -7,6 +7,8 @@ automatically if a message suggests real distress.
 
 Anchor is a supportive conversation tool, not therapy or medical advice.
 
+https://anchor-app-0bux.onrender.com
+
 ## Tech stack
 
 - **Frontend:** static HTML/CSS/JS (no build step), served by Express
