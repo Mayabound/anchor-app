@@ -1,3 +1,4 @@
+TEAM DOODLE
 # Anchor — daily wellness check-in
 
 A conversational check-in companion built with Node.js/Express and the Groq API (OpenAI-compatible, running Llama 3.3). Streams responses in real time, keeps the API key server-side, and surfaces crisis resources automatically if a message suggests real distress.
